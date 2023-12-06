@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODO LIST</title>
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h4>To-Do List Web App</h4>
+      </div>
+      <div class="body-container">
+        <div class="body-content">
+          <div class="todo-left-part">
+            <div class="input-filed">
+              <input type="text" id="title" placeholder="Title" />
+              <textarea
+                id="description"
+                placeholder="Description"
+                cols="30"
+                rows="5"
+              ></textarea>
+              <button
+                class="save-btn"
+                onclick="saveTask()"
+                style="cursor: pointer"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+          <div class="todo-right-part">
+            <div class="todo-item">
+              <label id="titleLabel">Title</label>
+              <label id="descriptionLabel">Description</label>
+              <label>Delete</label>
+            </div>
+            <hr style="margin: 20px 0; color: white" />
+
+            <ul
+              id="taskList"
+              style="list-style-type: none; padding: 10px 0; width: 100%"
+            ></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function saveTask() {
+        const titleInput = document.getElementById("title");
+        const descriptionInput = document.getElementById("description");
+        const taskList = document.getElementById("taskList");
+
+        const title = titleInput.value.trim();
+        const description = descriptionInput.value.trim();
+
+        if (title !== "" && description !== "") {
+          const listItem = document.createElement("li");
+          listItem.classList.add("task");
+
+          listItem.innerHTML = `
+                
+                    
+                    <ul style="display:flex;justify-content:space-between;align-items:center; background-color: #f0f0f0; margin-bottom: 10px; padding: 10px;">
+                        <li style="width:30%;">${title}</li>
+                        <li style="width:50%">${description}</li>
+                        <li><button class="todo-del-button" onclick="deleteTask(this)" style="cursor:pointer;">X</button></li>
+                    </ul>
+                `;
+
+          taskList.appendChild(listItem);
+
+          // Clear input fields
+          titleInput.value = "";
+          descriptionInput.value = "";
+        }
+      }
+
+      function deleteTask(deleteButton) {
+        const taskItem = deleteButton.parentElement.parentElement;
+        taskItem.remove();
+      }
+    </script>
+  </body>
+</html>
